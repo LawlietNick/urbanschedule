@@ -28,6 +28,48 @@ function urbanws_plugin_version() {
 	return $plugin_folder[$plugin_file]['Version'];
 }
 
+
+
+
+/* TEST AREA */
+
+// gavickpro_add_my_tc_button => urban_add_weekschedule_tc_button
+// gavickpro_tc_css => urban_weekschedule_tc_css
+// gavickpro_add_tinymce_plugin => urban_add_tinymce_plugin
+// gavickpro_register_my_tc_button => urban_register_weekschedule_tc_button
+// gavickpro_tc_button => urban_weekschedule_tc_button
+
+add_action('admin_head', 'urban_add_weekschedule_tc_button');
+add_action('admin_enqueue_scripts', 'urban_weekschedule_tc_css');
+function urban_add_weekschedule_tc_button() {
+    global $typenow;
+    // check if use can edit pages and posts
+    if ( !current_user_can('edit_posts') && !current_user_can('edit_pages') ) {
+   	return;
+    }
+    // verify post and page types
+    if( ! in_array( $typenow, array( 'post', 'page' ) ) )
+        return;
+	// check that WYSIWYG editor is enabled
+	if ( get_user_option('rich_editing') == 'true') {
+		add_filter("mce_external_plugins", "urban_add_tinymce_plugin");
+		add_filter('mce_buttons', 'urban_register_weekschedule_tc_button');
+	}
+}
+function urban_add_tinymce_plugin($plugin_array) {
+   	$plugin_array['urban_weekschedule_tc_button'] = plugins_url( '/urbanschedule.js', __FILE__ ); // CHANGE THE BUTTON SCRIPT HERE
+   	return $plugin_array;
+}
+function urban_register_weekschedule_tc_button($buttons) {
+   array_push($buttons, "urban_weekschedule_tc_button");
+   return $buttons;
+}
+function urban_weekschedule_tc_css() {
+	wp_enqueue_style('urban-tc', plugins_url('/style.css', __FILE__));
+}
+
+/* .TEST AREA */
+
 // ==============================================
 //	Setting up shortcodes
 // ==============================================
