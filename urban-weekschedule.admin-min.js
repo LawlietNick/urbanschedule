@@ -1,0 +1,1 @@
+!function(){tinymce.PluginManager.add("urban_tc_button",function(n,t){n.addButton("urban_tc_button",{text:"Week Schedule",icon:!1,onclick:function(){n.insertContent("Hello World!")}})})}();
