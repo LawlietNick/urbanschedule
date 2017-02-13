@@ -3,7 +3,7 @@
         editor.addButton( 'urban_weekschedule_tc_button', {
             title: 'My test button',
             type: 'menubutton',
-            icon: 'icon urban-schedule-icon',
+            icon: 'icon urban-weekschedule-icon',
             menu: [
                 {
                     text: 'Lisää tunti',
