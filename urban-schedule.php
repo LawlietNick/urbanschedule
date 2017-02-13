@@ -61,6 +61,14 @@ function urban_weekschedule_tc_css() {
 }
 
 
+// Include front css to make schedule look pretty
+function urban_weekschedule_front_css() {
+	wp_register_style( 'urban-styles',  plugin_dir_url( __FILE__ ) . 'schedule.css' );
+    wp_enqueue_style( 'urban-styles' );
+}
+
+add_action( 'wp_enqueue_scripts', 'urban_weekschedule_front_css');
+
 // ==============================================
 //	Setting up shortcodes
 // ==============================================
